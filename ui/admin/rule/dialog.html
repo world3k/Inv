@@ -1,0 +1,23 @@
+<form id="ruleForm" method="post">
+    <table class="editForm">
+    </table>
+</form>
+
+<script>
+    Option.FormTableBuild({
+        select: '.editForm',
+        url: '/admin/' + Module + '/field',
+        group: 2,
+        name: 'field',
+        title: 'remark',
+        class: '',
+        ignoreField: ['']
+    });
+
+    var select = 'select rule pid';
+
+    var array = select.split(' ');
+    Option.getComboBox('.'+array[0],'/admin/'+Module+'/tree');
+
+
+</script>

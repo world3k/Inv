@@ -1,0 +1,61 @@
+<table id="applyGrid"></table>
+<div id="applyToolbar">
+    <div class="searchForm">
+        <a href="javascript:void(0)" onclick="Option.setStatus(9)" class="easyui-linkbutton"
+           data-options="iconCls:'icon-close',plain:true">删除</a>
+        <a href="javascript:void(0)" onclick="Option.Reload()" class="easyui-linkbutton"
+           data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
+        <form id="applySearchForm" style="float: right">
+            部门<select name="pid" class="StatusSearch1"></select>
+            组别<select name="group" class="StatusSearch3"></select>
+            级别<select name="status" class="StatusSearch2"></select>
+            开始时间<input name="date_start" class="date_start">
+            结束时间<input name="date_end" class="date_end">
+            <input name="keyword" class="TextSearch">
+        </form>
+    </div>
+</div>
+<div id="applyDiaLog">
+    <form id="applyForm" method="post" hidden="hidden">
+        <table class="editForm">
+
+        </table>
+    </form>
+</div>
+<!--加载js-->
+<script type="text/javascript" src="/ui/point/apply/script.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        FromTools.TextSearch('.TextSearch');
+        FromTools.getComboBox('.StatusSearch2',Cache.get('level'));
+        FromTools.DateHorizon('.date_start', '.date_end');
+        FromTools.getComboBox('.StatusSearch3', Cache.get('shopGroup'));
+        FromTools.getComboBox('.StatusSearch1', Cache.get('dep'), true);
+
+    });
+    //    console.log( $('.StatusSearch1'));
+    //    $('.textbox').click(function(){
+    //         alert(1);
+    //
+    //    });
+
+
+    // /**
+    //  * 数据缓存
+    //  * @type {{get: Cache.get, set: Cache.set, del: Cache.del}}
+    //  */
+    // var Cache = {
+    //     get: function (key) {
+    //         return JSON.parse(sessionStorage.getItem(key));
+    //     },
+    //     set: function (key, value) {
+    //         return sessionStorage.setItem(key, JSON.stringify(value))
+    //     },
+    //     del: function (key) {
+    //         return sessionStorage.removeItem(key);
+    //     }
+    // };
+</script>

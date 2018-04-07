@@ -1,0 +1,70 @@
+<form id="menuForm" method="post">
+    <table class="editForm">
+        <tr>
+            <th>查询</th>
+            <td><input class="pid" name="pid"></td>
+            <!--<p>menutree</p>-->
+            <th>级别</th>
+            <td><input style="display: none" class="level" name="level"></td>
+
+        </tr>
+        <th>状态</th>
+        <td>
+            <div>
+                <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">请选择</a>
+                <input style="display: none" class="judge" name="status">
+            </div>
+
+
+            <div id="mm1" style="width:150px;">
+                <div class="attitude" iconCls="icon-undo">启用</div>
+                <div class="attitude" iconCls="icon-redo">禁用</div>
+            </div>
+
+            <!--<input style="display: none" class="status" name="status">-->
+        </td>
+
+        <th>链接</th>
+        <td><input name="alink"></td>
+
+
+    </table>
+
+</form>
+<script>
+    Option.getComboTree('.pid', '/admin/menu/test_think', function (data) {
+        var arr = [];
+        for (var i in data) {
+            arr.push(data[i]); //属性
+        }
+        var text = arr[3];
+        $('.level').val(text);
+
+
+    });
+    // Option.getComboTree('.status', '/admin/menu/status_think');
+    Option.getComboTree('.pid', '/admin/menu/test_think');
+    Option.FormTableBuild({
+        select: '.editForm',
+        url: '/admin/' + Module + '/field',
+        group: 2,
+        name: 'field',
+        title: 'remark',
+        class: '',
+        ignoreField: ['type', 'pid', 'status', 'alink']
+    })
+    $('.attitude').click(function () {
+        var val = this.innerText;
+        $('.easyui-menubutton').text(val);
+
+        if(this.innerText=="禁用"){
+            $('.judge').val(2);
+        }
+        if(this.innerText=="启用"){
+            $('.judge').val(1);
+        }
+
+    })
+
+
+</script>

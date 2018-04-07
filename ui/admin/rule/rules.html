@@ -1,0 +1,63 @@
+<form class="ruleForm" data-toggle="validate">
+    <table class="ruletable editForm" width="100%"></table>
+</form>
+
+<script>
+    $(function () {
+        var this_id = Cache.get(Module + 'GridIndex');
+        var ModuleInfo = Cache.get('ModuleInfo');
+
+        Qrck.get('/admin/rule/tree', {}, '', function (ruleLists) {
+
+            Qrck.get('/admin/' + ModuleInfo.Module + '/rulelsit?id=' + this_id, {}, '', function (checkd) {
+
+                $('.ruletable').append(eachTableForm(ruleLists, checkd));
+
+            }, function () {
+                $('.ruletable').append(eachTableForm(ruleLists, checkd));
+            });
+        });
+
+
+        function eachTableForm(ruleLists, checkd) {
+            var html = '';
+            html += '<table class="editForm">';
+            $.each(ruleLists, function (key, item) {
+                html += '<tr>';
+
+                html += '<td>' + input(item, checkd) + item.title + '</td>';
+                if (typeof item.children !== 'undefined') {
+                    html += '<td>';
+                    html += '<table class="editForm" >';
+                    $.each(item.children, function (k, v) {
+                        html += '<tr>';
+                        html += '<td>' + input(v, checkd) + v.title + '</td>';
+                        html += '<td>';
+                        if (typeof v.children !== 'undefined') {
+                            // html += '<table>';
+                            $.each(v.children, function (kk, vv) {
+                                // html += '<tr>';
+                                html += input(vv, checkd) + vv.title;
+                            });
+                        }
+                        html += '</td>';
+                        html += '</tr>';
+                    });
+                    html += '</table>';
+                    html += '</td>';
+                }
+                html += '</tr>';
+            });
+            html += '</table>';
+            return html;
+        }
+
+        function input(item, checkd) {
+            if (in_array(checkd, item.id)) {
+                return '<input name="r' + item.id + '"  checked="checked" value="1"  type="checkbox" style="margin-left:15px; margin-right: 5px"  >';
+            }
+            return '<input name="r' + item.id + '"  type="checkbox" value="0" style="margin-left:15px; margin-right: 5px" >';
+        }
+
+    });
+</script>
