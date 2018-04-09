@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customers</title>
+</head>
+<body>
+
+  <h1>Customer list</h1>
+
+  <table>
+    <tr>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>IN STOCK</th>
+    </tr>
+    <tr th:each="user : ${user}">
+      <td th:text="${user.id}">id</td>
+      <td th:text="${user.name}">name</td>
+      <td th:text="${user.date_of_birth}">date of birth</td>
+    </tr>
+  </table>
+
+
+  <p>
+    <a href="../home.html" th:href="@{/}">Return to home</a>
+  </p>
+
+</body>
+</html>
