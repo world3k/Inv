@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    $(function () {
+        Qrck.get("admin/index/festmenu", {}, "", function (res) {
+
+            var mc = "";
+            if (res.length > 0) {
+                for (var i = 0; i < res.length; i++) {
+                    mc += '<div class="portal"><a href="'+Qrck.baseHtmlUrl + res[i]['alink'] + '.html"><p>' + res[i]['text'] + '</p></a></div>';
+                }
+                $("#main_icon_Links").append(mc);
+            }
+        });
+    })
+</script>
+<div id="main_icon_Links"></div>
