@@ -1,0 +1,23 @@
+<form id="posForm" method="post">
+    <table class="editForm">
+        <tr>
+            <th><label>上级:</label></th>
+            <td><input class="pid" name="pid"></td>
+
+            <th><label></label></th>
+            <td></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+    Option.FormTableBuild({
+        select: '.editForm',
+        url: '/admin/' + Module + '/field',
+        group: 2,
+        name: 'field',
+        title: 'remark',
+        class: '',
+        ignoreField: ['type', 'pid']
+    });
+</script>
