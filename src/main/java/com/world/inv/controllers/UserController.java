@@ -23,7 +23,7 @@ public class UserController {
 	
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public @ResponseBody String addNewUser (@RequestParam String name
-			, @RequestParam String email) {
+			) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 		
@@ -41,7 +41,7 @@ public class UserController {
 	
 	 @RequestMapping(path="/easy")
 	    public String easy() {
-	        return "basic";
+	        return "display";
 	    }
 	
 	 @RequestMapping(value="/basic", method=RequestMethod.GET )
@@ -49,4 +49,10 @@ public class UserController {
 	    public String basic() {
 	        return "basic";
 	    }
+	 
+	 @GetMapping(path="/login") // Map ONLY GET Requests
+		public @ResponseBody String login (@RequestParam String name
+				, @RequestParam String password) {
+			return "name is "+name+" password is "+password;
+		}
 }
