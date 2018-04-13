@@ -1,21 +1,20 @@
 package cn.gson.crm.controller;
 
-import cn.gson.crm.common.AjaxResult;
-import cn.gson.crm.common.Constants;
-import cn.gson.crm.common.SocketMessage;
-import cn.gson.crm.common.VerifyCodeUtils;
-import cn.gson.crm.handler.WebSocketHandler;
-import cn.gson.crm.model.dao.MemberDao;
-import cn.gson.crm.model.dao.ResourceDao;
-import cn.gson.crm.model.dao.RoleDao;
-import cn.gson.crm.model.domain.Member;
-import cn.gson.crm.model.domain.Resource;
-import cn.gson.crm.model.domain.Role;
-import cn.gson.crm.model.enums.Gender;
-import cn.gson.crm.model.enums.ResourceType;
-import cn.gson.crm.service.AttachmentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static cn.gson.crm.common.Constants.SESSION_MEMBER_KEY;
+import static cn.gson.crm.common.Constants.SESSION_VERIFY_CODE_KEY;
+import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang.StringUtils.isNotEmpty;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +30,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static cn.gson.crm.common.Constants.SESSION_MEMBER_KEY;
-import static cn.gson.crm.common.Constants.SESSION_VERIFY_CODE_KEY;
-import static org.apache.commons.lang.StringUtils.isEmpty;
-import static org.apache.commons.lang.StringUtils.isNotEmpty;
+import cn.gson.crm.common.AjaxResult;
+import cn.gson.crm.common.Constants;
+import cn.gson.crm.common.SocketMessage;
+import cn.gson.crm.common.VerifyCodeUtils;
+import cn.gson.crm.handler.WebSocketHandler;
+import cn.gson.crm.model.dao.MemberDao;
+import cn.gson.crm.model.dao.RegionDao;
+import cn.gson.crm.model.dao.ResourceDao;
+import cn.gson.crm.model.dao.RoleDao;
+import cn.gson.crm.model.domain.Member;
+import cn.gson.crm.model.domain.Resource;
+import cn.gson.crm.model.domain.Role;
+import cn.gson.crm.model.enums.Gender;
+import cn.gson.crm.model.enums.ResourceType;
+import cn.gson.crm.service.AttachmentService;
 
 /**
  * 系统的入口控制器，入口控制器里面的请求，理论上都受权限控制
@@ -55,7 +63,10 @@ public class AppController {
 
     @Autowired
     RoleDao roleDao;
-
+    
+    @Autowired
+    RegionDao regionDao;
+    
     @Autowired
     ResourceDao resourceDao;
 
