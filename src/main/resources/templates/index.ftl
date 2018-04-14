@@ -49,8 +49,14 @@
   <h1>Online Distribution Center</h1>
 </div>
 <div title="Menu" data-options="region:'west',iconCls:'fa fa-list'" style="width: 200px">
-  <div class="easyui-accordion" data-options="fit:true,border:false">
-  <#list menus as menu>
+    <div class="easyui-accordion" id="accordion" data-options="fit:true,border:false,onSelect:function (title,index) {
+
+          var obj = $('#accordion').accordion('getPanel',index);
+          var ul=  obj.context.firstElementChild;
+           $(ul).children().each(function() {
+              $(this).removeClass();
+           });
+    }">  <#list menus as menu>
 	  <#if !menu.parent??>
         <div title="${menu.resName}" data-options="iconCls:'fa fa-cogs'">
           <ul class="crm-menu">
