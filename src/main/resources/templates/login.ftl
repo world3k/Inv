@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="logo_box">
-  <h1>Distribution Center
+  <h1>Online Distribution Center</h1>
   <form action="login" method="post" autocomplete="off">
     <div class="input_outer">
       <i class="fa fa-user-o u_user"></i>

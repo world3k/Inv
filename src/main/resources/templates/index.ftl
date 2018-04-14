@@ -44,7 +44,7 @@
   <div class="user-info">
     <span class="item" id="public_change_info"><i class="fa fa-user"></i> ${s_member.realName}</span>
     <span class="item" id="public_change_password"><i class="fa fa-user"></i> Change Password</span>
-    <a class="item" href="/logout"><i class="fa fa-sign-out"></i> 注销</a>
+    <a class="item" href="/logout"><i class="fa fa-sign-out"></i>Log out</a>
   </div>
   <h1>Online Distribution Center</h1>
 </div>

@@ -4,13 +4,13 @@
 }
 
 body {
-  font-family: "微软雅黑";
+ // font-family: "微软雅黑";
   font-size: 14px;
   background: url(../images/login-bg.jpg) fixed center center;
 }
 
 .logo_box {
-  width: 280px;
+  width: 400px;
   height: 490px;
   padding: 35px;
   color: #EEE;

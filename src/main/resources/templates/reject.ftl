@@ -1,1 +1,1 @@
-您没有权限访问此页面。
+You do not have permission to access this page.
